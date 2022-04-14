@@ -1,0 +1,18 @@
+# Any private crt and keys #
+############################
+*.crt
+*.key
+*~
+\#*
+
+# OS specific #
+###############
+Thumbs.db
+.DS_Store
+.vscode
+
+# Terraform specific #
+######################
+.terraform
+*tfstate*
+*.tfvars

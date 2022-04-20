@@ -4,7 +4,7 @@
 
 This demo uses Terraform to automate the setup of an NGINX Proxy Cache Web Server pseudo-production environment.
 
-A PDF containing accompanying slides for this demo can also be found under the name of <TODO>.
+A PDF containing accompanying slides for this demo can also be found under the name of [`Using NGINX as a Web Server and Reverse Proxy Cache 101`](Using%20NGINX%20as%20a%20Web%20Server%20and%20Reverse%20Proxy%20Cache%101.pdf).
 
 ## Requirements
 
@@ -41,7 +41,7 @@ You will find a series of NGINX configuration files in the [`nginx_proxy_cache_w
 
 A deployment script to help you copy the configuration files, [`deploy.sh`](nnginx_proxy_cache_web_server_config/deploy.sh), is also provided. To run the script, use the step number as a parameter, e.g. `./deploy.sh 1` for step 1. You might need to make the deployment script executable by running `sudo chmod +x deploy.sh`.
 
-### Step 1 -> Deploy a simplified defaulf config file
+### Step 1 -> Deploy a simple web server
 
 To deploy:
 
@@ -49,36 +49,145 @@ To deploy:
 
 To test:
 
-`curl -s http://localhost:80`
+`curl -s http://localhost`
 
 Expected response:
 
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-<title>Welcome to nginx!</title>
-<style>
-html { color-scheme: light dark; }
-body { width: 35em; margin: 0 auto;
-font-family: Tahoma, Verdana, Arial, sans-serif; }
-</style>
-</head>
-<body>
-<h1>Welcome to nginx!</h1>
-<p>If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.</p>
-
-<p>For online documentation and support please refer to
-<a href="http://nginx.org/">nginx.org</a>.<br/>
-Commercial support is available at
-<a href="http://nginx.com/">nginx.com</a>.</p>
-
-<p><em>Thank you for using nginx.</em></p>
-</body>
+<center>
+    <style>
+        div {
+            border: 15px solid;
+        }
+        .btn {
+            color: #fff;
+            background-color: #e74c3c;
+            outline: none;
+            border: 0;
+            color: #fff;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            margin-top: 50px;
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative;
+            width: 25%;
+            height: 45px;
+        }
+    </style>
+    <div>
+        <h1> Welcome to the Grand Canyon!!! </h1><br>
+        <img src="grand-canyon.jpg" alt="Grand Canyon"
+            style="width:650px;height:400px;" />
+    </div>
+</center>
 </html>
+```
+
+### Step 2 -> Deploy a simple reverse proxy
+
+To deploy:
+
+`./deploy.sh 2`
+
+To test:
+
+`curl -s http://localhost`
+
+Expected response:
+
+```html
+<!DOCTYPE html>
+<html>
+<center>
+    <style>
+        div {
+            border: 15px solid;
+        }
+        .btn {
+            color: #fff;
+            background-color: #e74c3c;
+            outline: none;
+            border: 0;
+            color: #fff;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            margin-top: 50px;
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative;
+            width: 25%;
+            height: 45px;
+        }
+    </style>
+    <div>
+        <h1> Welcome to the Grand Canyon!!! (Server 1/2) </h1><br>
+        <img src="grand-canyon.jpg" alt="Grand Canyon"
+            style="width:650px;height:400px;" />
+    </div>
+</center>
+</html>
+```
+
+### Step 3 -> Deploy a simple reverse proxy content cache
+
+To deploy:
+
+`./deploy.sh 3`
+
+To test:
+
+`curl -s http://localhost/api/7/http/caches | jq`
+
+Expected response:
+
+```json
+{
+  "my_cache": {
+    "size": 618496,
+    "cold": false,
+    "hit": {
+      "responses": 26,
+      "bytes": 6681729
+    },
+    "stale": {
+      "responses": 0,
+      "bytes": 0
+    },
+    "updating": {
+      "responses": 0,
+      "bytes": 0
+    },
+    "revalidated": {
+      "responses": 0,
+      "bytes": 0
+    },
+    "miss": {
+      "responses": 3,
+      "bytes": 607799,
+      "responses_written": 3,
+      "bytes_written": 607799
+    },
+    "expired": {
+      "responses": 0,
+      "bytes": 0,
+      "responses_written": 0,
+      "bytes_written": 0
+    },
+    "bypass": {
+      "responses": 0,
+      "bytes": 0,
+      "responses_written": 0,
+      "bytes_written": 0
+    }
+  }
+}
 ```
 
 ## Author Information
 
 [Alessandro Fael Garcia](https://github.com/alessfg)
+
+[Amir Rawdat](https://github.com/rawdata123)

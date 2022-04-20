@@ -10,9 +10,11 @@ if (( $1 < 1 || $1 > 3 )); then
   exit 1;
 fi
 
-if [ $1 = 2 ]; then
+if [ $1 = 1 ]; then
+  sudo cp -r step_1/html /usr/share/nginx
+  sudo cp -r step_1/images /usr/share/nginx
+elif [ $1 = 2 ]; then
   sudo cp -r step_2/html /usr/share/nginx
-  sudo cp -r step_2/images /usr/share/nginx
 elif [ $1 = 3 ]; then
   sudo mkdir -p /tmp/nginx/cache
 fi

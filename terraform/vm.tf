@@ -72,6 +72,12 @@ resource "null_resource" "upload_nginx_proxy_cache_web_server_config_files" {
     source      = "../nginx_proxy_cache_web_server_config"
     destination = "/home/ubuntu"
   }
+  provisioner "remote-exec" {
+    inline = [
+      "set -ex",
+      "sudo chmod +x /home/ubuntu/nginx_proxy_cache_web_server_config/deploy.sh",
+    ]
+  }
   connection {
     type        = "ssh"
     user        = "ubuntu"

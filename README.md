@@ -39,7 +39,7 @@ And finally, once you are done playing with the demo, you can destroy the AWS in
 
 You will find a series of NGINX configuration files in the [`nginx_proxy_cache_web_server_config`](nginx_proxy_cache_web_server_config/) folder. The folder is divided into individual steps, meant to be copied into their respective directory in order. By default, the folder is uploaded to your NGINX Plus instance.
 
-A deployment script to help you copy the configuration files, [`deploy.sh`](nnginx_proxy_cache_web_server_config/deploy.sh), is also provided. To run the script, use the step number as a parameter, e.g. `./deploy.sh 1` for step 1. You might need to make the deployment script executable by running `sudo chmod +x deploy.sh`.
+A deployment script to help you copy the configuration files, [`deploy.sh`](nnginx_proxy_cache_web_server_config/deploy.sh), is also provided. To run the script, use the step number as a parameter, e.g. `./deploy.sh 1` for step 1.
 
 ### Step 1 -> Deploy a simple web server
 
